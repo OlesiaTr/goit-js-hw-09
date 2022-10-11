@@ -2,9 +2,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refs = {
   form: document.querySelector('.form'),
-  delay: document.querySelector('[name="delay"]'),
-  step: document.querySelector('[name="step"]'),
-  amount: document.querySelector('[name="amount"]'),
 };
 
 refs.form.addEventListener('submit', onSubmit);
@@ -26,9 +23,10 @@ function createPromise(position, delay) {
 function onSubmit(e) {
   e.preventDefault();
   // Gets values from inputs.
-  let delay = Number(refs.delay.value);
-  const step = Number(refs.step.value);
-  const amount = Number(refs.amount.value);
+  let { delay, step, amount } = e.currentTarget;
+  delay = Number(delay.value);
+  step = Number(step.value);
+  amount = Number(amount.value);
 
   for (let position = 1; position <= amount; position += 1) {
     // Returns one promise that will be fulfilled or rejected after delay time.
